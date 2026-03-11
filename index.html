@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Student System - Signup</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f1f3f4;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.container{
+background:white;
+width:380px;
+padding:40px;
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+text-align:center;
+}
+
+input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#1a73e8;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+a{
+color:#1a73e8;
+text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Student System</h2>
+<h3>Signup</h3>
+
+<input id="username" placeholder="Username">
+
+<input id="email" placeholder="Email">
+
+<input id="password" type="password" placeholder="Password">
+
+<button onclick="signup()">Signup</button>
+
+<br><br>
+
+<a href="login.html">Already have account? Login</a>
+
+</div>
+
+<script>
+
+const supabaseUrl = "https://gbzfcmgdocqzjtclofjg.supabase.co"
+
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdiemZjbWdkb2Nxemp0Y2xvZmpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMyMzcxMzMsImV4cCI6MjA4ODgxMzEzM30.WivFZClbY3AP1KYyKTeS1IzmVixeHoQpvEvPK3HLhZA"
+
+const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey)
+
+async function signup(){
+
+let username=document.getElementById("username").value
+let email=document.getElementById("email").value
+let password=document.getElementById("password").value
+
+const { data, error } = await supabaseClient
+.from("users")
+.insert([
+{
+username:username,
+email:email,
+password:password
+}
+])
+
+if(error){
+
+alert("Error: "+error.message)
+
+}else{
+
+alert("Signup successful!")
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
+
+
